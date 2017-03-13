@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'material-two-stage-rating'
+
+    publishedGroupId = 'be.jatra.materialtwostagerating'
+    libraryName = 'material-two-stage-rating'
+    artifact = 'material-two-stage-rating'
+
+    libraryDescription = 'A library, following Google\'s Material Design, to help you promote your Android app by prompting users to rate the app after using it for a few days. Its two stage process ensures higher reviews to go to playstore while getting useful feedback on lower ratings.'
+
+    siteUrl = 'https://github.com/wimbervoets/MaterialTwoStageRating'
+    gitUrl = 'https://github.com/wimbervoets/MaterialTwoStageRating.git'
+
+//    libraryVersion = '0.0.1'
+    libraryVersion = "${setup.appVersion}.${setup.appBuildNumber}"
+
+    developerId = 'wimbervoets'
+    developerName = 'Wim Bervoets'
+    developerEmail = 'jatrasoftware@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion setup.compileSdk
+    buildToolsVersion setup.buildTools
+
+    defaultConfig {
+        minSdkVersion setup.minSdk
+        targetSdkVersion setup.targetSdk
+        versionCode setup.appBuildNumber
+        versionName setup.appVersion
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile "com.android.support:appcompat-v7:${versions.supportLib}"
+
+    compile 'com.afollestad.material-dialogs:commons:0.9.3.0'
+    compile 'com.afollestad.material-dialogs:core:0.9.3.0'
+
+    testCompile 'junit:junit:4.12'
+}
+
+
+apply from: 'https://raw.githubusercontent.com/wimbervoets/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/wimbervoets/JCenter/master/bintrayv1.gradle'
+
+//https://inthecheesefactory.com/blog/how-to-upload-library-to-jcenter-maven-central-as-dependency/en

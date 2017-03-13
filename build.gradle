@@ -1,0 +1,53 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        setup = [
+                appVersion    : "0.1",
+                appBuildNumber: 1,
+                appCodeName   : "Agra",
+                compileSdk    : 25,
+                buildTools    : "25.0.2",
+                minSdk        : 15,
+                targetSdk     : 21
+        ]
+
+        versions = [
+                javaSource        : JavaVersion.VERSION_1_7,
+                javaTarget        : JavaVersion.VERSION_1_7,
+                supportLib        : "25.1.1",
+                buildTools        : "25.0.2",
+                slf4JAndroid      : "1.7.14",
+//                butterknife       : "8.0.1",
+        ]
+    }
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.5"
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
+
+subprojects {
+    tasks.withType(Javadoc).all { enabled = false }
+}

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MaterialTwoStageRating</string>
+    <string name="label_rateprompt_title">How would you rate our app?</string>
+    <string name="label_rateprompt_remind_me_later">Remind me later</string>
+    <string name="label_rateprompt_never_show_again">Never show again</string>
+    <string name="label_feedback_title">We\'re Really Sorry</string>
+    <string name="label_feedback_content">Could you tell us what problem you faced. This will help us improve.</string>
+    <string name="label_feedback_feedback">Write your feedback here!</string>
+    <string name="label_feedback_positive_button">Submit</string>
+    <string name="label_feedback_negative_button">No Thanks!</string>
+    <string name="label_confirm_title">Thank you!</string>
+    <string name="label_confirm_content">Would you like to post your review on app store. This will help and motivate us a lot.</string>
+    <string name="label_confirm_positive_button">Sure</string>
+    <string name="label_confirm_negative_button">No Thanks!</string>
+</resources>

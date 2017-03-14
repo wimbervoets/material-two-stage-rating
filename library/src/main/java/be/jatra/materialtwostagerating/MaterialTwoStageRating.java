@@ -460,10 +460,10 @@ public class MaterialTwoStageRating {
     }
 
     /**
-     * User gave good rating at first but declined to rate on playstore
+     * User gave good rating at first but declined to rate on playstore.
      *
-     * @param shouldReset
-     * @return
+     * @param shouldReset the flag indicating if the rating should be reset or not
+     * @return the current instance
      */
     public MaterialTwoStageRating resetOnRatingDeclined(boolean shouldReset) {
         PrefUtils.setResetOnRatingDeclined(shouldReset, mContext);
@@ -487,6 +487,7 @@ public class MaterialTwoStageRating {
     }
     /**
      * Sets up setting items if they are in preferences. Else it just sets the default values
+     * @param context the context
      */
     private static void setUpSettingsIfNotExists(Context context) {
         settings.setEventsTimes(Utils.getIntSystemValue(SHARED_PREFERENCES_TOTAL_EVENTS_COUNT, context, 10));

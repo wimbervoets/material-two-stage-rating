@@ -104,8 +104,8 @@ public class Utils {
     /**
      * Takes out the day from date object
      *
-     * @param date
-     * @return
+     * @param date the date
+     * @return the day part of the given date
      */
     public static Calendar getDatePart(Date date) {
         Calendar cal = Calendar.getInstance();       // get calendar instance
@@ -119,8 +119,11 @@ public class Utils {
     }
 
     /**
-     * This method also assumes endDate >= startDate
-     **/
+     * This method also assumes endDate &gt;= startDate
+     * @param startDate the start date
+     * @param endDate the end date
+     * @return the number of days between the given start- and end date
+     */
     public static long daysBetween(Date startDate, Date endDate) {
         Calendar sDate = getDatePart(startDate);
         Calendar eDate = getDatePart(endDate);
@@ -134,8 +137,10 @@ public class Utils {
     }
 
     /**
-     * retrieves app icon resource id
-     **/
+     * Retrieves app icon resource id.
+     * @param context the context
+     * @return the resource id of the app icon
+     */
     public static int twoStageGetAppIconResourceId(Context context) {
         int appIconResId = -1;
         String packageName = context.getPackageName();

@@ -5,9 +5,9 @@ Also its two stage process ensures higher reviews to go to playstore while getti
 # Screenshots and stages
 
 
-<img src="https://raw.githubusercontent.com/shaileshmamgain5/TwoStageRate/master/snapshots/Screenshot_20170102-161620.png" width="200" height="350" />
-<img src="https://raw.githubusercontent.com/shaileshmamgain5/TwoStageRate/master/snapshots/Screenshot_20170102-161628.png" width="200" height="350" />
-<img src="https://raw.githubusercontent.com/shaileshmamgain5/TwoStageRate/master/snapshots/Screenshot_20170102-161834.png" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wimbervoets/MaterialTwoStageRating/master/snapshots/Screenshot_20170102-161620.png" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wimbervoets/MaterialTwoStageRating/master/snapshots/Screenshot_20170102-161628.png" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wimbervoets/MaterialTwoStageRating/master/snapshots/Screenshot_20170102-161834.png" width="200" height="350" />
 
 **Stage 1)** A dialog is displayed to prompt users to rate your app.
 
@@ -122,13 +122,35 @@ For now you need to add a feedback listener wherever you want to listen for feed
                    setFeedbackDialogNegativeText("NEGATIVE_BUTTON_TEXT").
                    setFeedbackDialogDismissible(false);
              }
-             
-# Contributors
-  Dmitriy Mishin (https://github.com/mishindmitriy)
 
-Kindly contribute the library to include
-1) Custom styles. Or Picking up application's app icon and accent colors.
-2) Reporting and fixing bugs
 
-Cheers!         
+##Contribute
+Contributions are welcome. Please open a [pull-request](https://help.github.com/articles/about-pull-requests/).
+
+
+#Developed By
+
+* Wim Bervoets
+ * [about.me/wbervoets](https://about.me/wbervoets)
+ * [paypal.me/wimbervoets](https://www.paypal.me/wimbervoets)
+* The source code is based on https://github.com/shaileshmamgain5/TwoStageRate
+
+
+#License
+
+    Copyright 2017 Wim Bervoets
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+
 

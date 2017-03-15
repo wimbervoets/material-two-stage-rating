@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-import be.jatra.materialtwostagerating.FeedbackDialogListener;
-import be.jatra.materialtwostagerating.FeedbackWithRatingReceivedListener;
+import be.jatra.materialtwostagerating.DialogDismissedCallback;
+import be.jatra.materialtwostagerating.FeedbackDialogCallback;
+import be.jatra.materialtwostagerating.FeedbackInclRatingCallback;
 import be.jatra.materialtwostagerating.MaterialTwoStageRating;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,13 +37,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MaterialTwoStageRating t = MaterialTwoStageRating.with(MainActivity.this);
-                t.withFeedbackWithRatingReceivedListener(new FeedbackWithRatingReceivedListener() {
+                t.withFeedbackInclRatingCallback(new FeedbackInclRatingCallback() {
                     @Override
                     public void onFeedbackReceived(float rating, String feedback) {
-                        Toast.makeText(MainActivity.this, String.format(Locale.ENGLISH, "Rating: %f. %s", rating, feedback), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, String.format(Locale.ENGLISH, "FeedbackInclRatingCallback - onFeedbackReceived() - rating=%f; feedback=%s", rating, feedback), Toast.LENGTH_LONG).show();
 
                     }
-                }).showRatePromptDialog();
+                });
+                t.withDialogDismissedCallback(new DialogDismissedCallback() {
+
+                    @Override
+                    public void onDialogDismissed() {
+                        Toast.makeText(MainActivity.this, "DialogDismissedCallback - onDialogDismissed()", Toast.LENGTH_LONG).show();
+                    }
+                });
+                t.withFeedbackDialogCallback(new FeedbackDialogCallback() {
+                    @Override
+                    public void onSubmit(final String feedback) {
+                        Toast.makeText(MainActivity.this, String.format("FeedbackDialogCallback - onSubmit() - feedback=%s", feedback), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(MainActivity.this, "FeedbackDialogCallback - onCancel()", Toast.LENGTH_LONG).show();
+                    }
+                });
+                t.showRatePromptDialog();
                 //.incrementEvent();
             }
         });
@@ -81,26 +101,26 @@ public class MainActivity extends AppCompatActivity {
         /**
          * To receive feedback only, use this listener
          */
-        materialTwoStageRating.withFeedbackDialogListener(new FeedbackDialogListener() {
+        materialTwoStageRating.withFeedbackDialogCallback(new FeedbackDialogCallback() {
 
             @Override
             public void onSubmit(String feedback) {
-                Toast.makeText(MainActivity.this, feedback, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "onSubmit() - feedback=" + feedback, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancel() {
-
+                Toast.makeText(MainActivity.this, "onCancel()", Toast.LENGTH_SHORT).show();
             }
         });
 
         /**
          * To receive rating along with with feedback, use this.
          */
-        materialTwoStageRating.withFeedbackWithRatingReceivedListener(new FeedbackWithRatingReceivedListener() {
+        materialTwoStageRating.withFeedbackInclRatingCallback(new FeedbackInclRatingCallback() {
             @Override
             public void onFeedbackReceived(float rating, String feedback) {
-                Toast.makeText(MainActivity.this, "Rating :" + rating + "Feedback :" + feedback, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "FeedbackInclRatingCallback - onFeedbackReceived() - rating=" + rating + ", feedback=" + feedback, Toast.LENGTH_SHORT).show();
             }
         });
 

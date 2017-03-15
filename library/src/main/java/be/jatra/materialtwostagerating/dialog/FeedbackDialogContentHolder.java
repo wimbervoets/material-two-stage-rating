@@ -2,11 +2,11 @@ package be.jatra.materialtwostagerating.dialog;
 
 public final class FeedbackDialogContentHolder {
 
-    private String feedbackPromptTitle; // = "We're Really Sorry";
-    private String feedbackPromptText; // = "Could you tell us what problem you faced. This will help us improve.";
-    private String feedbackPromptPositiveText; // = "Submit";
-    private String feedbackPromptNegativeText; // = "No Thanks!";
-    private boolean dismissible; // = true;
+    private String feedbackPromptTitle;
+    private String feedbackPromptText;
+    private String feedbackPromptPositiveText;
+    private String feedbackPromptNegativeText;
+    private boolean dismissible;
 
     public final String getFeedbackPromptTitle() {
         return feedbackPromptTitle;

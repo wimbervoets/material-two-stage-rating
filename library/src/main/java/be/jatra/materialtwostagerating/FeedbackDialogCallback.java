@@ -1,6 +1,6 @@
 package be.jatra.materialtwostagerating;
 
-public interface FeedbackDialogListener {
+public interface FeedbackDialogCallback {
 
     void onSubmit(String feedback);
 

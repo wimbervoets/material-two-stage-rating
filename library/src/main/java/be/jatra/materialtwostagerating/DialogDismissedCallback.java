@@ -1,6 +1,6 @@
 package be.jatra.materialtwostagerating;
 
-public interface DialogDismissedListener {
+public interface DialogDismissedCallback {
 
     void onDialogDismissed();
 }

@@ -5,10 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.InputType;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -36,9 +33,9 @@ public class MaterialTwoStageRating {
     private FeedbackDialogContentHolder feedbackDialogContentHolder = new FeedbackDialogContentHolder();
     private ConfirmRateDialogContentHolder confirmRateDialogContentHolder = new ConfirmRateDialogContentHolder();
 
-    private FeedbackDialogListener feedbackDialogListener;
-    private DialogDismissedListener dialogDismissedListener;
-    private FeedbackWithRatingReceivedListener feedbackWithRatingReceivedListener;
+    private FeedbackDialogCallback feedbackDialogCallback;
+    private DialogDismissedCallback dialogDismissedCallback;
+    private FeedbackInclRatingCallback feedbackInclRatingCallback;
 
     private MaterialTwoStageRating(final Context context) {
         this.mContext = context;
@@ -63,8 +60,6 @@ public class MaterialTwoStageRating {
         setUpSettingsIfNotExists(context);
         return new MaterialTwoStageRating(context);
     }
-
-
 
     /**
      * Checks if the conditions are met (anu one ) and shows prompt if yes.
@@ -130,14 +125,14 @@ public class MaterialTwoStageRating {
                         dialog1.show();
                     }
                 } else {
-                    MaterialDialog dialog1 = createDefaultFeedbackDialog(context, feedbackDialogContentHolder, new FeedbackDialogListener() {
+                    MaterialDialog dialog1 = createDefaultFeedbackDialog(context, feedbackDialogContentHolder, new FeedbackDialogCallback() {
                         @Override
                         public void onSubmit(String feedback) {
-                            if (feedbackDialogListener != null) {
-                                feedbackDialogListener.onSubmit(feedback);
+                            if (feedbackDialogCallback != null) {
+                                feedbackDialogCallback.onSubmit(feedback);
                             }
-                            if (feedbackWithRatingReceivedListener != null) {
-                                feedbackWithRatingReceivedListener.onFeedbackReceived(rating, feedback);
+                            if (feedbackInclRatingCallback != null) {
+                                feedbackInclRatingCallback.onFeedbackReceived(rating, feedback);
                             }
                         }
 
@@ -197,7 +192,7 @@ public class MaterialTwoStageRating {
         return dialog;
     }
 
-    protected MaterialDialog createDefaultFeedbackDialog(final Context context, final FeedbackDialogContentHolder feedbackDialogContentHolder, final FeedbackDialogListener feedbackDialogListener) {
+    protected MaterialDialog createDefaultFeedbackDialog(final Context context, final FeedbackDialogContentHolder feedbackDialogContentHolder, final FeedbackDialogCallback feedbackDialogCallback) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(R.string.label_feedback_title)
                 .content(R.string.label_feedback_content)
@@ -218,8 +213,8 @@ public class MaterialTwoStageRating {
                         final String inputText = dialog.getInputEditText().getText().toString();
                         if (inputText != null && inputText.length() > 0) {
                             dialog.dismiss();
-                            if (feedbackDialogListener != null) {
-                                feedbackDialogListener.onSubmit(inputText);
+                            if (feedbackDialogCallback != null) {
+                                feedbackDialogCallback.onSubmit(inputText);
                             }
                         } else {
                             Toast.makeText(context, "Bro.. Write Something", Toast.LENGTH_LONG).show();
@@ -233,8 +228,8 @@ public class MaterialTwoStageRating {
                         if (PrefUtils.shouldResetOnFeedbackDeclined(mContext)) {
                             resetTwoStage();
                         }
-                        if (feedbackDialogListener != null) {
-                            feedbackDialogListener.onCancel();
+                        if (feedbackDialogCallback != null) {
+                            feedbackDialogCallback.onCancel();
                         }
                     }
                 })
@@ -310,8 +305,8 @@ public class MaterialTwoStageRating {
         return this;
     }
 
-    public final MaterialTwoStageRating withFeedbackDialogListener(final FeedbackDialogListener feedbackDialogListener) {
-        this.feedbackDialogListener = feedbackDialogListener;
+    public final MaterialTwoStageRating withFeedbackDialogCallback(final FeedbackDialogCallback feedbackDialogCallback) {
+        this.feedbackDialogCallback = feedbackDialogCallback;
         return this;
     }
 
@@ -349,30 +344,29 @@ public class MaterialTwoStageRating {
      ****************************************************************************************** */
     public MaterialTwoStageRating withInstallDays(final int installDays) {
         PrefUtils.setTotalInstallDays(installDays, mContext);
-        settings.installDays = installDays;
+        settings.setInstallDays(installDays);
         return this;
     }
 
     public MaterialTwoStageRating withLaunchTimes(final int launchTimes) {
         PrefUtils.setTotalLaunchTimes(launchTimes, mContext);
-        settings.launchTimes = launchTimes;
+        settings.setLaunchTimes(launchTimes);
         return this;
     }
 
     public MaterialTwoStageRating withEventsTimes(final int eventsTimes) {
         PrefUtils.setTotalEventsCount(eventsTimes, mContext);
-        settings.eventsTimes = eventsTimes;
+        settings.setEventsTimes(eventsTimes);
         return this;
     }
 
-
     public MaterialTwoStageRating withThresholdRating(final float thresholdRating) {
-        settings.thresholdRating = thresholdRating;
+        settings.setThresholdRating(thresholdRating);
         return this;
     }
 
     public MaterialTwoStageRating withStoreType(final Settings.StoreType storeType) {
-        settings.storeType = storeType;
+        settings.setStoreType(storeType);
         return this;
     }
 
@@ -382,23 +376,23 @@ public class MaterialTwoStageRating {
     }
 
     /* ******************************************************************************************
-     * Listeners.                                                                               *
+     * Callbacks.                                                                               *
      ****************************************************************************************** */
-    public MaterialTwoStageRating withFeedbackWithRatingReceivedListener(FeedbackWithRatingReceivedListener feedbackWithRatingReceivedListener) {
-        this.feedbackWithRatingReceivedListener = feedbackWithRatingReceivedListener;
+    public MaterialTwoStageRating withFeedbackInclRatingCallback(FeedbackInclRatingCallback feedbackInclRatingCallback) {
+        this.feedbackInclRatingCallback = feedbackInclRatingCallback;
         return this;
     }
 
-    public MaterialTwoStageRating withOnDialogDismissedListener(final DialogDismissedListener dialogDismissedListener) {
-        this.dialogDismissedListener = dialogDismissedListener;
+    public MaterialTwoStageRating withDialogDismissedCallback(final DialogDismissedCallback dialogDismissedCallback) {
+        this.dialogDismissedCallback = dialogDismissedCallback;
         return this;
     }
 
     public void onDialogDismissed() {
         if (PrefUtils.shouldResetOnDismiss(mContext))
             resetTwoStage();
-        if (dialogDismissedListener != null)
-            dialogDismissedListener.onDialogDismissed();
+        if (dialogDismissedCallback != null)
+            dialogDismissedCallback.onDialogDismissed();
     }
 
     /* ******************************************************************************************
@@ -493,6 +487,5 @@ public class MaterialTwoStageRating {
         settings.setEventsTimes(Utils.getIntSystemValue(SHARED_PREFERENCES_TOTAL_EVENTS_COUNT, context, 10));
         settings.setInstallDays(Utils.getIntSystemValue(SHARED_PREFERENCES_TOTAL_INSTALL_DAYS, context, 5));
         settings.setLaunchTimes(Utils.getIntSystemValue(SHARED_PREFERENCES_TOTAL_LAUNCH_TIMES, context, 5));
-
     }
 }

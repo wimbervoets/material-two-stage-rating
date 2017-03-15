@@ -1,6 +1,6 @@
 package be.jatra.materialtwostagerating;
 
-public interface FeedbackWithRatingReceivedListener {
+public interface FeedbackInclRatingCallback {
 
     void onFeedbackReceived(float rating, String feedback);
 }

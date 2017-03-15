@@ -2,9 +2,9 @@ package be.jatra.materialtwostagerating.dialog;
 
 public final class RatePromptDialogContentHolder {
 
-    private String ratePromptTitle; // = "How would you rate our app?";//R.string.label_question_rate_app
-    private String ratePromptLaterText; // = "Remind me later";//R.string.label_remind_me_later
-    private String ratePromptNeverText; // = "Never show again";//R.string.label_never_show_again
+    private String ratePromptTitle;
+    private String ratePromptLaterText;
+    private String ratePromptNeverText;
     private boolean dismissible = true;
 
     public final String getRatePromptTitle() {

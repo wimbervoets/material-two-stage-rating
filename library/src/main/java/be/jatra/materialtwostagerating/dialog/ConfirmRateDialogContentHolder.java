@@ -2,11 +2,11 @@ package be.jatra.materialtwostagerating.dialog;
 
 public final class ConfirmRateDialogContentHolder {
 
-    private String confirmRateTitle; // = "Thank you!";
-    private String confirmRateText; // = "Would you like to post your review on app store. This will help and motivate us a lot.";
-    private String confirmRateNegativeText; // = "No Thanks!";
-    private String confirmRatePositiveText; // = "Sure";
-    private boolean dismissible; // = true;
+    private String confirmRateTitle;
+    private String confirmRateText;
+    private String confirmRateNegativeText;
+    private String confirmRatePositiveText;
+    private boolean dismissible;
 
     public final String getConfirmRateTitle() {
         return confirmRateTitle;

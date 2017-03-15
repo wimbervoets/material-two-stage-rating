@@ -1,23 +1,23 @@
 package be.jatra.materialtwostagerating;
 
-public final class Settings {
-
-    public int launchTimes = 10;
-
-    public int installDays = 5;
-
-    public int eventsTimes = 10;
-
-    public float thresholdRating = 3;
+final class Settings {
 
     public enum StoreType {
         GOOGLEPLAY,
         AMAZON
     }
 
-    StoreType storeType = StoreType.GOOGLEPLAY;
+    private int launchTimes = 10;
 
-    public void setInstallDays(int installDays) {
+    private int installDays = 5;
+
+    private int eventsTimes = 10;
+
+    private float thresholdRating = 3;
+
+    private StoreType storeType = StoreType.GOOGLEPLAY;
+
+    public void setInstallDays(final int installDays) {
         this.installDays = installDays;
     }
 
@@ -25,7 +25,7 @@ public final class Settings {
         return this.installDays;
     }
 
-    public void setLaunchTimes(int launchTimes) {
+    public void setLaunchTimes(final int launchTimes) {
         this.launchTimes = launchTimes;
     }
 
@@ -33,7 +33,7 @@ public final class Settings {
         return this.launchTimes;
     }
 
-    public void setEventsTimes(int eventsTimes) {
+    public void setEventsTimes(final int eventsTimes) {
         this.eventsTimes = eventsTimes;
     }
 
@@ -41,7 +41,7 @@ public final class Settings {
         return this.eventsTimes;
     }
 
-    public void setThresholdRating(float thresholdRating) {
+    public void setThresholdRating(final float thresholdRating) {
         this.thresholdRating = thresholdRating;
     }
 
@@ -49,13 +49,11 @@ public final class Settings {
         return this.thresholdRating;
     }
 
-    public void setStoreType(StoreType storeType) {
+    public void setStoreType(final StoreType storeType) {
         this.storeType = storeType;
     }
 
     public StoreType getStoreType() {
         return this.storeType;
     }
-
-
 }

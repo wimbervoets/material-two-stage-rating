@@ -4,6 +4,7 @@ public final class FeedbackDialogContentHolder {
 
     private String feedbackPromptTitle;
     private String feedbackPromptText;
+    private String feedbackPromptPlaceholder;
     private String feedbackPromptPositiveText;
     private String feedbackPromptNegativeText;
     private boolean dismissible;
@@ -22,6 +23,14 @@ public final class FeedbackDialogContentHolder {
 
     public final void setFeedbackPromptText(final String feedbackPromptText) {
         this.feedbackPromptText = feedbackPromptText;
+    }
+
+    public final String getFeedbackPlaceholder() {
+        return feedbackPromptPlaceholder;
+    }
+
+    public final void setFeedbackPlaceholder(final String feedbackPromptPlaceholder) {
+        this.feedbackPromptPlaceholder = feedbackPromptPlaceholder;
     }
 
     public final String getFeedbackPromptPositiveText() {

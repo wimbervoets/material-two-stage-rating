@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -50,6 +51,7 @@ public class MaterialTwoStageRating {
         feedbackDialogContentHolder.setFeedbackPromptText(mContext.getString(R.string.label_feedback_content));
         feedbackDialogContentHolder.setFeedbackPromptPositiveText(mContext.getString(R.string.label_feedback_positive_button));
         feedbackDialogContentHolder.setFeedbackPromptNegativeText(mContext.getString(R.string.label_feedback_negative_button));
+        feedbackDialogContentHolder.setFeedbackPlaceholder(mContext.getString(R.string.label_feedback_feedback));
         confirmRateDialogContentHolder.setConfirmRateTitle(mContext.getString(R.string.label_confirm_title));
         confirmRateDialogContentHolder.setConfirmRateText(mContext.getString(R.string.label_confirm_content));
         confirmRateDialogContentHolder.setConfirmRatePositiveText(mContext.getString(R.string.label_confirm_positive_button));
@@ -93,19 +95,15 @@ public class MaterialTwoStageRating {
 
     protected MaterialDialog createRatePromptDialog(final Context context, final RatePromptDialogContentHolder ratePromptDialogContentHolder, final float threshold) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context).customView(R.layout.dialog_rate_initial, true).build();
-//        final MaterialDialog dialog = new MaterialDialog.Builder(context)
-//                .content(R.string.label_question_rate_app)
-//                .positiveText(R.string.label_remind_me_later)
-//                .negativeText(R.string.label_never_show_again)
-//                .build();
+
         if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOW_ICON_KEY, context, true))) {
             dialog.setIcon(Utils.twoStageGetAppIconResourceId(context));
         }
         dialog.setCancelable(this.ratePromptDialogContentHolder.isDismissible());
 
 //        // set the custom dialog components - text, image and button
-//        TextView title = (TextView) dialog.findViewById(R.id.tvRatePromptTitle);
-//        title.setText(ratePromptDialogContentHolder.getRatePromptTitle());
+        TextView title = (TextView) dialog.findViewById(R.id.tvRatePromptTitle);
+        title.setText(ratePromptDialogContentHolder.getRatePromptTitle());
         RatingBar rbRating = (RatingBar) dialog.findViewById(R.id.rbRatePromptBar);
 //        ImageView ivAppIcon = (ImageView) dialog.findViewById(R.id.ivAppIcon);
 //
@@ -160,8 +158,10 @@ public class MaterialTwoStageRating {
 
     protected MaterialDialog createConfirmRateDialog(final Context context, final ConfirmRateDialogContentHolder confirmRateDialogContentHolder) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context)
-                .title(context.getString(R.string.label_confirm_title))
-                .content(context.getString(R.string.label_confirm_content))
+                .title(confirmRateDialogContentHolder.getConfirmRateTitle())
+                .content(confirmRateDialogContentHolder.getConfirmRateText())
+                .positiveText(confirmRateDialogContentHolder.getConfirmRatePositiveText())
+                .negativeText(confirmRateDialogContentHolder.getConfirmRateNegativeText())
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -194,13 +194,13 @@ public class MaterialTwoStageRating {
 
     protected MaterialDialog createDefaultFeedbackDialog(final Context context, final FeedbackDialogContentHolder feedbackDialogContentHolder, final FeedbackDialogCallback feedbackDialogCallback) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context)
-                .title(R.string.label_feedback_title)
-                .content(R.string.label_feedback_content)
-                .positiveText(R.string.label_feedback_positive_button)
-                .negativeText(R.string.label_feedback_negative_button)
+                .title(feedbackDialogContentHolder.getFeedbackPromptTitle())
+                .content(feedbackDialogContentHolder.getFeedbackPromptText())
+                .positiveText(feedbackDialogContentHolder.getFeedbackPromptPositiveText())
+                .negativeText(feedbackDialogContentHolder.getFeedbackPromptNegativeText())
                 .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_CLASS_TEXT)
                 .inputRangeRes(3, -1, R.color.md_edittext_error)
-                .input(context.getString(R.string.label_feedback_feedback), "", new MaterialDialog.InputCallback() {
+                .input(feedbackDialogContentHolder.getFeedbackPlaceholder(), "", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
                         // Do something

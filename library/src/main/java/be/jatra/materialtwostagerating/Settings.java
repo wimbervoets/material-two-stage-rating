@@ -3,7 +3,7 @@ package be.jatra.materialtwostagerating;
 final class Settings {
 
     public enum StoreType {
-        GOOGLEPLAY,
+        GOOGLE_PLAY,
         AMAZON
     }
 
@@ -15,7 +15,7 @@ final class Settings {
 
     private float thresholdRating = 3;
 
-    private StoreType storeType = StoreType.GOOGLEPLAY;
+    private StoreType storeType = StoreType.GOOGLE_PLAY;
 
     public void setInstallDays(final int installDays) {
         this.installDays = installDays;

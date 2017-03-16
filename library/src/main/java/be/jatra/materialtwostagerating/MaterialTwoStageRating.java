@@ -7,13 +7,15 @@ import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.Date;
 
+import be.jatra.materialtwostagerating.callback.ConfirmRateDialogCallback;
+import be.jatra.materialtwostagerating.callback.FeedbackDialogCallback;
+import be.jatra.materialtwostagerating.callback.RatePromptDialogCallback;
 import be.jatra.materialtwostagerating.dialog.ConfirmRateDialogContentHolder;
 import be.jatra.materialtwostagerating.dialog.FeedbackDialogContentHolder;
 import be.jatra.materialtwostagerating.dialog.RatePromptDialogContentHolder;
@@ -35,8 +37,8 @@ public class MaterialTwoStageRating {
     private ConfirmRateDialogContentHolder confirmRateDialogContentHolder = new ConfirmRateDialogContentHolder();
 
     private FeedbackDialogCallback feedbackDialogCallback;
-    private DialogDismissedCallback dialogDismissedCallback;
-    private FeedbackInclRatingCallback feedbackInclRatingCallback;
+    private RatePromptDialogCallback ratePromptDialogCallback;
+    private ConfirmRateDialogCallback confirmRateDialogCallback;
 
     private MaterialTwoStageRating(final Context context) {
         this.mContext = context;
@@ -123,22 +125,7 @@ public class MaterialTwoStageRating {
                         dialog1.show();
                     }
                 } else {
-                    MaterialDialog dialog1 = createDefaultFeedbackDialog(context, feedbackDialogContentHolder, new FeedbackDialogCallback() {
-                        @Override
-                        public void onSubmit(String feedback) {
-                            if (feedbackDialogCallback != null) {
-                                feedbackDialogCallback.onSubmit(feedback);
-                            }
-                            if (feedbackInclRatingCallback != null) {
-                                feedbackInclRatingCallback.onFeedbackReceived(rating, feedback);
-                            }
-                        }
-
-                        @Override
-                        public void onCancel() {
-
-                        }
-                    });
+                    MaterialDialog dialog1 = createFeedbackDialog(context, feedbackDialogContentHolder, rating);
                     if (dialog1 != null) {
                         dialog1.show();
                     }
@@ -149,10 +136,12 @@ public class MaterialTwoStageRating {
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                onDialogDismissed();
+                resetTwoStageIfPreferred();
+                if (ratePromptDialogCallback != null) {
+                    ratePromptDialogCallback.onCancel();
+                }
             }
         });
-
         return dialog;
     }
 
@@ -165,7 +154,7 @@ public class MaterialTwoStageRating {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        final Intent intentToAppstore = settings.getStoreType() == Settings.StoreType.GOOGLEPLAY ?
+                        final Intent intentToAppstore = settings.getStoreType() == Settings.StoreType.GOOGLE_PLAY ?
                                 IntentHelper.createIntentForGooglePlay(context) : IntentHelper.createIntentForAmazonAppstore(context);
                         context.startActivity(intentToAppstore);
                         dialog.dismiss();
@@ -178,6 +167,10 @@ public class MaterialTwoStageRating {
                         if ((PrefUtils.shouldResetOnRatingDeclined(mContext))) {
                             resetTwoStage();
                         }
+
+                        if (confirmRateDialogCallback != null) {
+                            confirmRateDialogCallback.onCancel();
+                        }
                         dialog.dismiss();
                     }
                 })
@@ -186,13 +179,16 @@ public class MaterialTwoStageRating {
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                onDialogDismissed();
+                resetTwoStageIfPreferred();
+                if (confirmRateDialogCallback != null) {
+                    confirmRateDialogCallback.onCancel();
+                }
             }
         });
         return dialog;
     }
 
-    protected MaterialDialog createDefaultFeedbackDialog(final Context context, final FeedbackDialogContentHolder feedbackDialogContentHolder, final FeedbackDialogCallback feedbackDialogCallback) {
+    protected MaterialDialog createFeedbackDialog(final Context context, final FeedbackDialogContentHolder feedbackDialogContentHolder, final float rating) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(feedbackDialogContentHolder.getFeedbackPromptTitle())
                 .content(feedbackDialogContentHolder.getFeedbackPromptText())
@@ -214,10 +210,8 @@ public class MaterialTwoStageRating {
                         if (inputText != null && inputText.length() > 0) {
                             dialog.dismiss();
                             if (feedbackDialogCallback != null) {
-                                feedbackDialogCallback.onSubmit(inputText);
+                                feedbackDialogCallback.onFeedbackReceived(inputText, rating);
                             }
-                        } else {
-                            Toast.makeText(context, "Bro.. Write Something", Toast.LENGTH_LONG).show();
                         }
                     }
                 })
@@ -234,12 +228,14 @@ public class MaterialTwoStageRating {
                     }
                 })
                 .build();
-
         dialog.setCancelable(true);
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                onDialogDismissed();
+                resetTwoStageIfPreferred();
+                if (feedbackDialogCallback != null) {
+                    feedbackDialogCallback.onCancel();
+                }
             }
         });
         return dialog;
@@ -302,11 +298,6 @@ public class MaterialTwoStageRating {
 
     public final MaterialTwoStageRating withFeedbackDialogDismissible(final boolean dismissible) {
         this.feedbackDialogContentHolder.setDismissible(dismissible);
-        return this;
-    }
-
-    public final MaterialTwoStageRating withFeedbackDialogCallback(final FeedbackDialogCallback feedbackDialogCallback) {
-        this.feedbackDialogCallback = feedbackDialogCallback;
         return this;
     }
 
@@ -378,21 +369,19 @@ public class MaterialTwoStageRating {
     /* ******************************************************************************************
      * Callbacks.                                                                               *
      ****************************************************************************************** */
-    public MaterialTwoStageRating withFeedbackInclRatingCallback(FeedbackInclRatingCallback feedbackInclRatingCallback) {
-        this.feedbackInclRatingCallback = feedbackInclRatingCallback;
+    public final MaterialTwoStageRating withFeedbackDialogCallback(final FeedbackDialogCallback feedbackDialogCallback) {
+        this.feedbackDialogCallback = feedbackDialogCallback;
         return this;
     }
 
-    public MaterialTwoStageRating withDialogDismissedCallback(final DialogDismissedCallback dialogDismissedCallback) {
-        this.dialogDismissedCallback = dialogDismissedCallback;
+    public MaterialTwoStageRating withRatePromptDialogCallback(final RatePromptDialogCallback ratePromptDialogCallback) {
+        this.ratePromptDialogCallback = ratePromptDialogCallback;
         return this;
     }
 
-    public void onDialogDismissed() {
-        if (PrefUtils.shouldResetOnDismiss(mContext))
-            resetTwoStage();
-        if (dialogDismissedCallback != null)
-            dialogDismissedCallback.onDialogDismissed();
+    public MaterialTwoStageRating withConfirmRateDialogCallback(final ConfirmRateDialogCallback confirmRateDialogCallback) {
+        this.confirmRateDialogCallback = confirmRateDialogCallback;
+        return this;
     }
 
     /* ******************************************************************************************
@@ -425,7 +414,6 @@ public class MaterialTwoStageRating {
             PrefUtils.setLaunchCount(count, mContext);
             return false;
         }
-
     }
 
     private boolean isOverInstallDays() {
@@ -442,7 +430,6 @@ public class MaterialTwoStageRating {
                 return false;
             }
         }
-
     }
 
     private boolean isOverEventCounts() {
@@ -469,6 +456,15 @@ public class MaterialTwoStageRating {
         return this;
     }
 
+    private void resetTwoStageIfPreferred() {
+        resetTwoStage(PrefUtils.shouldResetOnDismiss(mContext));
+    }
+
+    private void resetTwoStage(final boolean resetOnDismiss) {
+        if (resetOnDismiss)
+            resetTwoStage();
+    }
+
     /**
      * This method is called when the user chooses 'remind me later'.
      */
@@ -479,6 +475,7 @@ public class MaterialTwoStageRating {
         PrefUtils.setLaunchCount(0, mContext);
         PrefUtils.setStopTrack(false, mContext);
     }
+
     /**
      * Sets up setting items if they are in preferences. Else it just sets the default values
      * @param context the context

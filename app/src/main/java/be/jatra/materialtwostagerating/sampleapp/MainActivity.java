@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-import be.jatra.materialtwostagerating.DialogDismissedCallback;
-import be.jatra.materialtwostagerating.FeedbackDialogCallback;
-import be.jatra.materialtwostagerating.FeedbackInclRatingCallback;
+import be.jatra.materialtwostagerating.callback.ConfirmRateDialogCallback;
+import be.jatra.materialtwostagerating.callback.RatePromptDialogCallback;
+import be.jatra.materialtwostagerating.callback.FeedbackDialogCallback;
 import be.jatra.materialtwostagerating.MaterialTwoStageRating;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,40 +30,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initTwoStage();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MaterialTwoStageRating t = MaterialTwoStageRating.with(MainActivity.this);
-                t.withFeedbackInclRatingCallback(new FeedbackInclRatingCallback() {
-                    @Override
-                    public void onFeedbackReceived(float rating, String feedback) {
-                        Toast.makeText(MainActivity.this, String.format(Locale.ENGLISH, "FeedbackInclRatingCallback - onFeedbackReceived() - rating=%f; feedback=%s", rating, feedback), Toast.LENGTH_LONG).show();
-
-                    }
-                });
-                t.withDialogDismissedCallback(new DialogDismissedCallback() {
-
-                    @Override
-                    public void onDialogDismissed() {
-                        Toast.makeText(MainActivity.this, "DialogDismissedCallback - onDialogDismissed()", Toast.LENGTH_LONG).show();
-                    }
-                });
-                t.withFeedbackDialogCallback(new FeedbackDialogCallback() {
-                    @Override
-                    public void onSubmit(final String feedback) {
-                        Toast.makeText(MainActivity.this, String.format("FeedbackDialogCallback - onSubmit() - feedback=%s", feedback), Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(MainActivity.this, "FeedbackDialogCallback - onCancel()", Toast.LENGTH_LONG).show();
-                    }
-                });
-                t.showRatePromptDialog();
-                //.incrementEvent();
+                initTwoStage();
             }
         });
     }
@@ -92,59 +64,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTwoStage() {
-        MaterialTwoStageRating materialTwoStageRating = MaterialTwoStageRating.with(this);
-        materialTwoStageRating.withInstallDays(5).withEventsTimes(3).withLaunchTimes(5);
-        materialTwoStageRating.resetOnDismiss(true).resetOnFeedBackDeclined(true).resetOnRatingDeclined(true);
-        materialTwoStageRating.withAppIcon(true);
-        materialTwoStageRating.showIfMeetsConditions();
+        MaterialTwoStageRating dialog = MaterialTwoStageRating.with(this)
+            .withInstallDays(5).withEventsTimes(3).withLaunchTimes(5)
+            .resetOnDismiss(true)
+            .resetOnFeedBackDeclined(true)
+            .resetOnRatingDeclined(true)
+            .withAppIcon(true)
+            .withFeedbackDialogCallback(new FeedbackDialogCallback() {
+                @Override
+                public void onFeedbackReceived(final String feedback, final float rating) {
+                    Toast.makeText(MainActivity.this, String.format(Locale.ENGLISH, "FeedbackDialogCallback-onFeedbackReceived(feedback=%s, rating=%f)", feedback, rating), Toast.LENGTH_LONG).show();
+                }
+                @Override
+                public void onCancel() {
+                    Toast.makeText(MainActivity.this, "FeedbackDialogCallback-onCancel()", Toast.LENGTH_SHORT).show();
+                }
+            })
+            .withRatePromptDialogCallback(new RatePromptDialogCallback() {
 
-        /**
-         * To receive feedback only, use this listener
-         */
-        materialTwoStageRating.withFeedbackDialogCallback(new FeedbackDialogCallback() {
+                @Override
+                public void onCancel() {
+                    Toast.makeText(MainActivity.this, "RatePromptDialogCallback-onCancel()", Toast.LENGTH_LONG).show();
+                }
+            })
+            .withConfirmRateDialogCallback(new ConfirmRateDialogCallback() {
+                @Override
+                public void onCancel() {
+                    Toast.makeText(MainActivity.this, "ConfirmRateDialogCallback-onCancel()", Toast.LENGTH_LONG).show();
+                }
+            });
+//        dialog.showIfMeetsConditions();
+        dialog.showRatePromptDialog();
+//        dialog.incrementEvent();
 
-            @Override
-            public void onSubmit(String feedback) {
-                Toast.makeText(MainActivity.this, "onSubmit() - feedback=" + feedback, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancel() {
-                Toast.makeText(MainActivity.this, "onCancel()", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        /**
-         * To receive rating along with with feedback, use this.
-         */
-        materialTwoStageRating.withFeedbackInclRatingCallback(new FeedbackInclRatingCallback() {
-            @Override
-            public void onFeedbackReceived(float rating, String feedback) {
-                Toast.makeText(MainActivity.this, "FeedbackInclRatingCallback - onFeedbackReceived() - rating=" + rating + ", feedback=" + feedback, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        /**
-         *  Provide your custom text on initial rate prompt dialog*/
-
-       //materialTwoStageRating.with(this).setRatePromptTitle("INITIAL_TITLE").
-        //        setRatePromptLaterText("LATER_TEXT").setRatePromptNeverText("NEVER_TEXT").setRatePromptDismissible(false);
-
-
-        /**
-         * provide custom text on the confirmation dialog*/
-
-        // materialTwoStageRating.with(this).setConfirmRateDialogTitle("CONFIRMATION_TITLE").setConfirmRateDialogDescription("CONFIRMATION_DESCRITPION").
-        //        setConfirmRateDialogPositiveText("POSITIVE_BUTTON_TEXT").setConfirmRateDialogNegativeText("NEGATIVE_BUTTON_TEXT").setConfirmRateDialogDismissible(true);
-
-
-        /**
-         * provide custom text on feedback dialog*/
-
-       // materialTwoStageRating.with(this).setFeedbackDialogTitle("FEEDBACK_TITLE").setFeedbackDialogDescription("FEEDBACK_DIALOG_DESCRIPTION").
-         //       setFeedbackDialogPositiveText("POSITIVE_BUTTON_TEXT").setFeedbackDialogNegativeText("NEGATIVE_BUTTON_TEXT").setFeedbackDialogDismissible(false);
-
-
+//        /**
+//         *  Provide your custom text on initial rate prompt dialog*/
+//       materialTwoStageRating.with(this)
+//               .withRatePromptTitle("INITIAL_TITLE")
+//               .withRatePromptLaterText("LATER_TEXT")
+//               .withRatePromptNeverText("NEVER_TEXT")
+//               .withRatePromptDismissible(false);
+//
+//        /**
+//         * provide custom text on the confirmation dialog*/
+//
+//         materialTwoStageRating.with(this)
+//                 .withConfirmRateDialogTitle("CONFIRMATION_TITLE")
+//                 .withConfirmRateDialogDescription("CONFIRMATION_DESCRITPION")
+//                 .withConfirmRateDialogPositiveText("POSITIVE_BUTTON_TEXT")
+//                 .withConfirmRateDialogNegativeText("NEGATIVE_BUTTON_TEXT")
+//                 .withConfirmRateDialogDismissible(true);
+//
+//        /**
+//         * provide custom text on feedback dialog*/
+//        materialTwoStageRating.with(this)
+//                .withFeedbackDialogTitle("FEEDBACK_TITLE")
+//                .withFeedbackDialogDescription("FEEDBACK_DIALOG_DESCRIPTION")
+//                .withFeedbackDialogPositiveText("POSITIVE_BUTTON_TEXT")
+//                .withFeedbackDialogNegativeText("NEGATIVE_BUTTON_TEXT")
+//                .withFeedbackDialogDismissible(false);
     }
 }

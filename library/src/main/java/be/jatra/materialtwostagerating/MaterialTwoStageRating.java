@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.InputType;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -96,26 +98,21 @@ public class MaterialTwoStageRating {
     }
 
     protected MaterialDialog createRatePromptDialog(final Context context, final RatePromptDialogContentHolder ratePromptDialogContentHolder, final float threshold) {
-        final MaterialDialog dialog = new MaterialDialog.Builder(context).customView(R.layout.dialog_rate_initial, true).build();
+        final MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .customView(R.layout.dialog_rate_initial, true)
+                .title(context.getString(R.string.label_rateprompt_title))
+                .positiveText(context.getString(R.string.label_rateprompt_rate))
+                .negativeText(context.getString(R.string.label_rateprompt_never_show_again))
+                .neutralText(context.getString(R.string.label_rateprompt_remind_me_later))
+                .build();
 
-        if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOW_ICON_KEY, context, true))) {
-            dialog.setIcon(Utils.twoStageGetAppIconResourceId(context));
+        if (PrefUtils.showAppIcon(context)) {
+//            appIcon.setImageResource(Utils.getAppIconResourceId(context));
+            dialog.setIcon(context.getResources().getDrawable(R.drawable.gray_circle));
         }
-        dialog.setCancelable(this.ratePromptDialogContentHolder.isDismissible());
 
-//        // set the custom dialog components - text, image and button
-        TextView title = (TextView) dialog.findViewById(R.id.tvRatePromptTitle);
-        title.setText(ratePromptDialogContentHolder.getRatePromptTitle());
-        RatingBar rbRating = (RatingBar) dialog.findViewById(R.id.rbRatePromptBar);
-//        ImageView ivAppIcon = (ImageView) dialog.findViewById(R.id.ivAppIcon);
-//
-//        if ((Utils.getBooleanSystemValue(SHARED_PREFERENCES_SHOW_ICON_KEY, context, true))) {
-//            ivAppIcon.setImageResource(Utils.twoStageGetAppIconResourceId(context));
-//            ivAppIcon.setVisibility(View.VISIBLE);
-//        } else {
-//            ivAppIcon.setVisibility(View.GONE);
-//        }
-
+        // set the custom dialog components - text, image and button
+        RatingBar rbRating = (RatingBar) dialog.findViewById(R.id.ratePromptBar);
         rbRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
@@ -133,6 +130,7 @@ public class MaterialTwoStageRating {
                 dialog.dismiss();
             }
         });
+        dialog.setCancelable(this.ratePromptDialogContentHolder.isDismissible());
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -242,7 +240,7 @@ public class MaterialTwoStageRating {
     }
 
     public MaterialTwoStageRating withAppIcon(final boolean showAppIcon) {
-        Utils.setBooleanSystemValue(SHARED_PREFERENCES_SHOW_ICON_KEY, showAppIcon, mContext);
+        PrefUtils.setShowAppIcon(showAppIcon, mContext);
         return this;
     }
 
@@ -480,9 +478,9 @@ public class MaterialTwoStageRating {
      * Sets up setting items if they are in preferences. Else it just sets the default values
      * @param context the context
      */
-    private static void setUpSettingsIfNotExists(Context context) {
-        settings.setEventsTimes(Utils.getIntSystemValue(SHARED_PREFERENCES_TOTAL_EVENTS_COUNT, context, 10));
-        settings.setInstallDays(Utils.getIntSystemValue(SHARED_PREFERENCES_TOTAL_INSTALL_DAYS, context, 5));
-        settings.setLaunchTimes(Utils.getIntSystemValue(SHARED_PREFERENCES_TOTAL_LAUNCH_TIMES, context, 5));
+    private static void setUpSettingsIfNotExists(final Context context) {
+        settings.setEventsTimes(PrefUtils.getTotalEventsCount(context));
+        settings.setInstallDays(PrefUtils.getTotalInstallDays(context));
+        settings.setLaunchTimes(PrefUtils.getTotalLaunchTimes(context));
     }
 }

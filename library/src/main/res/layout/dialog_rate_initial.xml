@@ -9,72 +9,10 @@
     android:paddingRight="15dp"
     android:paddingTop="15dp">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/ivAppIcon"-->
-        <!--android:layout_width="80dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginBottom="15dp"-->
-        <!--android:layout_marginLeft="15dp"-->
-        <!--android:layout_marginRight="15dp"-->
-        <!--android:padding="0dp"-->
-        <!--android:scaleType="fitCenter"-->
-        <!--android:src="@android:drawable/btn_star_big_on" />-->
-
-    <TextView
-        android:id="@+id/tvRatePromptTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="0dp"
-        android:paddingTop="0dp"
-        android:text="@string/label_rateprompt_title"
-        android:textAlignment="center"
-        android:textColor="@color/dialog_title_text_color"
-        android:textSize="@dimen/text_size_large" />
-
     <RatingBar
-        android:id="@+id/rbRatePromptBar"
+        android:id="@+id/ratePromptBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:numStars="5" />
-
-    <LinearLayout
-        android:id="@+id/llButtonsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="@string/label_rateprompt_never_show_again"
-            android:textColor="@color/rate_prompt_button_text_color"
-            android:textSize="@dimen/text_size_medium" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="@string/label_rateprompt_remind_me_later"
-            android:textColor="@color/rate_prompt_button_text_color"
-            android:textSize="@dimen/text_size_medium" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="@string/label_rateprompt_rate"
-            android:textColor="@color/rate_prompt_button_text_color"
-            android:textSize="@dimen/text_size_medium" />
-
-    </LinearLayout>
 </LinearLayout>

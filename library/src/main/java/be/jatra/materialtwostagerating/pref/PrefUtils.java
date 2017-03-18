@@ -7,7 +7,7 @@ public class PrefUtils {
 
     private static final String SHARED_PREFERENCES_NAME = "MaterialTwoStageRating-prefs";
 
-    public static final String SHARED_PREFERENCES_SHOW_ICON_KEY = "pref_MaterialTwoStageRating_ShowAppIcon";
+    public static final String SHARED_PREFERENCES_SHOW_APP_ICON = "pref_MaterialTwoStageRating_ShowAppIcon";
     public static final String SHARED_PREFERENCES_SHOULD_RESET_ON_DISMISS = "pref_MaterialTwoStageRating_ShouldRefreshOnPrimaryDismiss";
     public static final String SHARED_PREFERENCES_SHOULD_RESET_ON_RATING_DECLINED = "pref_MaterialTwoStageRating_ShouldResetOnDecliningToRate";
     public static final String SHARED_PREFERENCES_SHOULD_RESET_ON_FEEDBACK_DECLINED = "pref_MaterialTwoStageRating_ShouldResetOnDecliningForFeedBack";
@@ -20,6 +20,10 @@ public class PrefUtils {
     private static final String INSTALL_DATE = "pref_MaterialTwoStageRating_InstallDate";
     private static final String EVENT_COUNT = "pref_MaterialTwoStageRating_EventCount";
     private static final String STOP_TRACK = "pref_MaterialTwoStageRating_StopTrack";
+
+    public static boolean showAppIcon(final Context context) {
+        return getBooleanSystemValue(SHARED_PREFERENCES_SHOW_APP_ICON, context, true);
+    }
 
     public static boolean shouldResetOnDismiss(final Context context) {
         return getBooleanSystemValue(SHARED_PREFERENCES_SHOULD_RESET_ON_DISMISS, context, true);
@@ -34,15 +38,15 @@ public class PrefUtils {
     }
 
     public static int getTotalLaunchTimes(final Context context) {
-        return getIntSystemValue(SHARED_PREFERENCES_TOTAL_LAUNCH_TIMES, context);
+        return getIntSystemValue(SHARED_PREFERENCES_TOTAL_LAUNCH_TIMES, context, 5);
     }
 
     public static int getTotalEventsCount(final Context context) {
-        return getIntSystemValue(SHARED_PREFERENCES_TOTAL_EVENTS_COUNT, context);
+        return getIntSystemValue(SHARED_PREFERENCES_TOTAL_EVENTS_COUNT, context, 10);
     }
 
     public static int getTotalInstallDays( final Context context) {
-        return getIntSystemValue(SHARED_PREFERENCES_TOTAL_INSTALL_DAYS, context);
+        return getIntSystemValue(SHARED_PREFERENCES_TOTAL_INSTALL_DAYS, context, 5);
     }
 
     public static int getEventCount(final Context context) {
@@ -63,6 +67,10 @@ public class PrefUtils {
 
     public static boolean getStopTrack(final Context context) {
         return getBooleanSystemValue(STOP_TRACK, context);
+    }
+
+    public static void setShowAppIcon(final boolean showAppIcon, final Context context) {
+        setBooleanSystemValue(SHARED_PREFERENCES_SHOW_APP_ICON, showAppIcon, context);
     }
 
     public static void setResetOnDismiss(final boolean resetOnDismiss, final Context context) {

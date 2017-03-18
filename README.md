@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/wimbervoets/MaterialTwoStageRating.svg)](https://travis-ci.org/wimbervoets/MaterialTwoStageRating)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/wimbervoets/MaterialTwoStageRating/blob/master/LICENSE)
+
 # MaterialTwoStageRating
 MaterialTwoStageRating is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 Also its two stage process ensures higher reviews to go to playstore while getting useful feedback on lower ratings.

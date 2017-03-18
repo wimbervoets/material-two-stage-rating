@@ -3,12 +3,11 @@ package be.jatra.materialtwostagerating;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.text.InputType;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -23,8 +22,6 @@ import be.jatra.materialtwostagerating.dialog.FeedbackDialogContentHolder;
 import be.jatra.materialtwostagerating.dialog.RatePromptDialogContentHolder;
 import be.jatra.materialtwostagerating.pref.PrefUtils;
 import be.jatra.materialtwostagerating.pref.Utils;
-
-import static be.jatra.materialtwostagerating.pref.PrefUtils.*;
 
 public class MaterialTwoStageRating {
 
@@ -48,6 +45,7 @@ public class MaterialTwoStageRating {
     }
 
     private void init() {
+        ratePromptDialogContentHolder.setIcon(Utils.getAppIconResourceId(mContext));
         ratePromptDialogContentHolder.setRatePromptTitle(mContext.getString(R.string.label_rateprompt_title));
         ratePromptDialogContentHolder.setRatePromptLaterText(mContext.getString(R.string.label_rateprompt_remind_me_later));
         ratePromptDialogContentHolder.setRatePromptNeverText(mContext.getString(R.string.label_rateprompt_never_show_again));
@@ -100,15 +98,14 @@ public class MaterialTwoStageRating {
     protected MaterialDialog createRatePromptDialog(final Context context, final RatePromptDialogContentHolder ratePromptDialogContentHolder, final float threshold) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .customView(R.layout.dialog_rate_initial, true)
-                .title(context.getString(R.string.label_rateprompt_title))
+                .title(ratePromptDialogContentHolder.getRatePromptTitle())
                 .positiveText(context.getString(R.string.label_rateprompt_rate))
-                .negativeText(context.getString(R.string.label_rateprompt_never_show_again))
-                .neutralText(context.getString(R.string.label_rateprompt_remind_me_later))
+                .negativeText(ratePromptDialogContentHolder.getRatePromptNeverText())
+                .neutralText(ratePromptDialogContentHolder.getRatePromptLaterText())
                 .build();
 
         if (PrefUtils.showAppIcon(context)) {
-//            appIcon.setImageResource(Utils.getAppIconResourceId(context));
-            dialog.setIcon(context.getResources().getDrawable(R.drawable.gray_circle));
+            dialog.setIcon(ratePromptDialogContentHolder.getIcon());//Utils.getAppIconResourceId(context)
         }
 
         // set the custom dialog components - text, image and button
@@ -239,8 +236,13 @@ public class MaterialTwoStageRating {
         return dialog;
     }
 
-    public MaterialTwoStageRating withAppIcon(final boolean showAppIcon) {
-        PrefUtils.setShowAppIcon(showAppIcon, mContext);
+    public MaterialTwoStageRating withIcon(final boolean showIcon) {
+        PrefUtils.setShowIcon(showIcon, mContext);
+        return this;
+    }
+
+    public MaterialTwoStageRating withCustomIcon(@DrawableRes final int icon) {
+        this.ratePromptDialogContentHolder.setIcon(icon);
         return this;
     }
 

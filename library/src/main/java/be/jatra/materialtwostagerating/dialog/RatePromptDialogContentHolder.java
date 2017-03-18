@@ -1,11 +1,23 @@
 package be.jatra.materialtwostagerating.dialog;
 
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
+
 public final class RatePromptDialogContentHolder {
 
+    private @DrawableRes int icon;
     private String ratePromptTitle;
     private String ratePromptLaterText;
     private String ratePromptNeverText;
     private boolean dismissible = true;
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(@DrawableRes final int icon) {
+        this.icon = icon;
+    }
 
     public final String getRatePromptTitle() {
         return ratePromptTitle;

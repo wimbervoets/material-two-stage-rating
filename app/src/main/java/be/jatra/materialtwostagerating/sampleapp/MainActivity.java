@@ -65,11 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void initTwoStage() {
         MaterialTwoStageRating dialog = MaterialTwoStageRating.with(this)
-            .withInstallDays(5).withEventsTimes(3).withLaunchTimes(5)
+            .withInstallDays(5)
+            .withEventsTimes(3)
+            .withLaunchTimes(5)
             .resetOnDismiss(true)
             .resetOnFeedBackDeclined(true)
             .resetOnRatingDeclined(true)
-            .withAppIcon(true)
+            .withIcon(true)
+//            .withCustomIcon(R.drawable.gray_circle)
             .withFeedbackDialogCallback(new FeedbackDialogCallback() {
                 @Override
                 public void onFeedbackReceived(final String feedback, final float rating) {

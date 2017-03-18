@@ -3,7 +3,6 @@ package be.jatra.materialtwostagerating;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.text.InputType;
@@ -92,7 +91,6 @@ public class MaterialTwoStageRating {
         if (dialog != null) {
             dialog.show();
         }
-
     }
 
     protected MaterialDialog createRatePromptDialog(final Context context, final RatePromptDialogContentHolder ratePromptDialogContentHolder, final float threshold) {

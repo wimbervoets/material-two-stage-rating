@@ -1,6 +1,5 @@
 package be.jatra.materialtwostagerating.dialog;
 
-import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 
 public final class RatePromptDialogContentHolder {

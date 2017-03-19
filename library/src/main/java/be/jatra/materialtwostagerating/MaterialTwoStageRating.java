@@ -72,11 +72,9 @@ public class MaterialTwoStageRating {
      */
     public void showIfMeetsConditions() {
 
-        if (!PrefUtils.getStopTrack(mContext)) {
-            if (checkIfMeetsCondition() || isDebug) {
-                showRatePromptDialog();
-                PrefUtils.setStopTrack(true, mContext);
-            }
+        if (!PrefUtils.getStopTrack(mContext) && (checkIfMeetsCondition() || isDebug)) {
+            showRatePromptDialog();
+            PrefUtils.setStopTrack(true, mContext);
         }
     }
 
@@ -422,20 +420,12 @@ public class MaterialTwoStageRating {
             Date installDate = new Date(PrefUtils.getInstallDate(mContext));
             Date currentDate = new Date(System.currentTimeMillis());
             long days = Utils.daysBetween(installDate, currentDate);
-            if (days >= settings.getInstallDays()) {
-                return true;
-            } else {
-                return false;
-            }
+            return days >= settings.getInstallDays();
         }
     }
 
     private boolean isOverEventCounts() {
-        if (PrefUtils.getEventCount(mContext) >= settings.getEventsTimes()) {
-            return true;
-        } else {
-            return false;
-        }
+        return PrefUtils.getEventCount(mContext) >= settings.getEventsTimes();
     }
 
     /**

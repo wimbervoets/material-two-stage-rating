@@ -6,7 +6,6 @@
 MaterialTwoStageRating is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 Also its two stage process ensures higher reviews to go to playstore while getting useful feedback on lower ratings.
 
-The source code is based on [TwoStageRate](https://github.com/shaileshmamgain5/TwoStageRate).
 
 # Screenshots and stages
 
@@ -20,9 +19,16 @@ TODO
 
 TODO
 
+# Apps using the MaterialDrawer
+
+TODO
 
 # Contribute
 Contributions are welcome. Please open a [pull-request](https://help.github.com/articles/about-pull-requests/).
+
+# Credits
+
+* [Shailesh Mamgain] (https://github.com/shaileshmamgain5/TwoStageRate)
 
 
 # Developed By

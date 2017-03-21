@@ -14,5 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:progressDrawable="@drawable/ratingbar_stars"
         android:numStars="5" />
 </LinearLayout>

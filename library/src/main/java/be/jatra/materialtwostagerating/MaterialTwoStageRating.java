@@ -46,8 +46,6 @@ public class MaterialTwoStageRating {
     private void init() {
         ratePromptDialogContentHolder.setIcon(Utils.getAppIconResourceId(mContext));
         ratePromptDialogContentHolder.setRatePromptTitle(mContext.getString(R.string.label_rateprompt_title));
-        ratePromptDialogContentHolder.setRatePromptLaterText(mContext.getString(R.string.label_rateprompt_remind_me_later));
-        ratePromptDialogContentHolder.setRatePromptNeverText(mContext.getString(R.string.label_rateprompt_never_show_again));
         feedbackDialogContentHolder.setFeedbackPromptTitle(mContext.getString(R.string.label_feedback_title));
         feedbackDialogContentHolder.setFeedbackPromptText(mContext.getString(R.string.label_feedback_content));
         feedbackDialogContentHolder.setFeedbackPromptPositiveText(mContext.getString(R.string.label_feedback_positive_button));
@@ -93,11 +91,8 @@ public class MaterialTwoStageRating {
 
     protected MaterialDialog createRatePromptDialog(final Context context, final RatePromptDialogContentHolder ratePromptDialogContentHolder, final float threshold) {
         final MaterialDialog dialog = new MaterialDialog.Builder(context)
-                .customView(R.layout.dialog_rate_initial, true)
+                .customView(R.layout.ratingbar, true)
                 .title(ratePromptDialogContentHolder.getRatePromptTitle())
-                .positiveText(context.getString(R.string.label_rateprompt_rate))
-                .negativeText(ratePromptDialogContentHolder.getRatePromptNeverText())
-                .neutralText(ratePromptDialogContentHolder.getRatePromptLaterText())
                 .build();
 
         if (PrefUtils.showAppIcon(context)) {
@@ -110,15 +105,9 @@ public class MaterialTwoStageRating {
             @Override
             public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
                 if (rating > threshold) {
-                    MaterialDialog dialog1 = createConfirmRateDialog(context, confirmRateDialogContentHolder);
-                    if (dialog1 != null) {
-                        dialog1.show();
-                    }
+                    createConfirmRateDialog(context, confirmRateDialogContentHolder).show();
                 } else {
-                    MaterialDialog dialog1 = createFeedbackDialog(context, feedbackDialogContentHolder, rating);
-                    if (dialog1 != null) {
-                        dialog1.show();
-                    }
+                    createFeedbackDialog(context, feedbackDialogContentHolder, rating).show();
                 }
                 dialog.dismiss();
             }
@@ -251,16 +240,6 @@ public class MaterialTwoStageRating {
      ****************************************************************************************** */
     public final MaterialTwoStageRating withRatePromptTitle(final String ratePromptTitle) {
         this.ratePromptDialogContentHolder.setRatePromptTitle(ratePromptTitle);
-        return this;
-    }
-
-    public final MaterialTwoStageRating withRatePromptLaterText(final String ratePromptLaterText) {
-        this.ratePromptDialogContentHolder.setRatePromptLaterText(ratePromptLaterText);
-        return this;
-    }
-
-    public final MaterialTwoStageRating withRatePromptNeverText(final String ratePromptNeverText) {
-        this.ratePromptDialogContentHolder.setRatePromptNeverText(ratePromptNeverText);
         return this;
     }
 

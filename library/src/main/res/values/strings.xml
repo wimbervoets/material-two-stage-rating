@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">MaterialTwoStageRating</string>
     <string name="label_rateprompt_title">How would you rate our app?</string>
-    <string name="label_rateprompt_remind_me_later">Remind me later</string>
-    <string name="label_rateprompt_never_show_again">Never show again</string>
-    <string name="label_rateprompt_rate">Rate</string>
     <string name="label_feedback_title">We\'re Really Sorry</string>
     <string name="label_feedback_content">Could you tell us what problem you faced. This will help us improve.</string>
     <string name="label_feedback_feedback">Write your feedback here!</string>

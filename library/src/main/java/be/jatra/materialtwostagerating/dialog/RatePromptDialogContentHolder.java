@@ -6,8 +6,6 @@ public final class RatePromptDialogContentHolder {
 
     private @DrawableRes int icon;
     private String ratePromptTitle;
-    private String ratePromptLaterText;
-    private String ratePromptNeverText;
     private boolean dismissible = true;
 
     public int getIcon() {
@@ -24,22 +22,6 @@ public final class RatePromptDialogContentHolder {
 
     public final void setRatePromptTitle(final String ratePromptTitle) {
         this.ratePromptTitle = ratePromptTitle;
-    }
-
-    public final String getRatePromptLaterText() {
-        return ratePromptLaterText;
-    }
-
-    public final void setRatePromptLaterText(final String ratePromptLaterText) {
-        this.ratePromptLaterText = ratePromptLaterText;
-    }
-
-    public final String getRatePromptNeverText() {
-        return ratePromptNeverText;
-    }
-
-    public final void setRatePromptNeverText(final String ratePromptNeverText) {
-        this.ratePromptNeverText = ratePromptNeverText;
     }
 
     public final boolean isDismissible() {

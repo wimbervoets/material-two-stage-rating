@@ -17,9 +17,12 @@ TODO
 
 #  Usage
 
-TODO
+Put this one liner in the onCreate() method of your activity:
+```java
+	MaterialTwoStageRating.with(this).showIfMeetsConditions();
+```
 
-# Apps using the MaterialDrawer
+# Apps using MaterialTwoStageRating
 
 TODO
 
@@ -28,7 +31,7 @@ Contributions are welcome. Please open a [pull-request](https://help.github.com/
 
 # Credits
 
-* [Shailesh Mamgain] (https://github.com/shaileshmamgain5/TwoStageRate)
+* [Shailesh Mamgain](https://github.com/shaileshmamgain5/TwoStageRate)
 
 
 # Developed By

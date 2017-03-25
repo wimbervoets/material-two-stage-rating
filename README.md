@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/wimbervoets/MaterialTwoStageRating.svg)](https://travis-ci.org/wimbervoets/material-two-stage-rating)
+[![Build Status](https://api.travis-ci.org/wimbervoets/material-two-stage-rating.svg)](https://travis-ci.org/wimbervoets/material-two-stage-rating)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d2be3003a2244fb8bef6fd91b9fd87e)](https://www.codacy.com/app/wimbervoets/material-two-stage-rating?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wimbervoets/MaterialTwoStageRating&amp;utm_campaign=Badge_Grade)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/wimbervoets/MaterialTwoStageRating/blob/master/LICENSE)
 
@@ -13,7 +13,13 @@ TODO
 
 # Install
 
-TODO
+Go to your project's build.gradle, and add the Maven OSS Snapshot repository:
+
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+
+Go to your app's build.gradle file and inside dependencies{} add :
+
+     compile 'be.jatra:materialtwostagerating:1.0.0-SNAPSHOT'
 
 #  Usage
 

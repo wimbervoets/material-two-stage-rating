@@ -6,7 +6,7 @@ buildscript {
                 appCodeName   : "Agra",
                 compileSdk    : 25,
                 buildTools    : "25.0.2",
-                minSdk        : 15,
+                minSdk        : 13,
                 targetSdk     : 21
         ]
 

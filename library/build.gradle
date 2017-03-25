@@ -24,9 +24,6 @@ android {
     }
 }
 
-apply from: 'gradle-mvn-push.gradle'
-apply from: 'gradle-jcenter-push.gradle'
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -37,6 +34,9 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
 }
+
+apply from: 'gradle-mvn-push.gradle'
+apply from: 'gradle-jcenter-push.gradle'
 
 
 // gradle clean build uploadArchives

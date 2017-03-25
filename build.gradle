@@ -31,10 +31,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.jfrog.bintray" version "1.5"
-}
-
 allprojects {
     repositories {
         jcenter()
@@ -47,3 +43,5 @@ allprojects {
 task wrapper(type: Wrapper) {
     gradleVersion = '3.3'
 }
+
+// ./gradlew clean build uploadArchives

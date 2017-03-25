@@ -1,23 +1,37 @@
 apply plugin: 'com.android.application'
 
+//try {
+//    apply from: '../../../signing.gradle'
+//} catch (ex) {
+//}
+
 android {
     compileSdkVersion setup.compileSdk
     buildToolsVersion setup.buildTools
 
     defaultConfig {
-        applicationId "be.jatra.materialtwostagerating.sampleapp"
         minSdkVersion setup.minSdk
         targetSdkVersion setup.targetSdk
         versionCode setup.appBuildNumber
         versionName setup.appVersion
+        setProperty("archivesBaseName", "-v$versionName-c$versionCode")
     }
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix "-DEBUG"
+            try {
+                signingConfig signingConfigs.debug
+            } catch (ex) {
+            }
             minifyEnabled false
         }
         release {
+            try {
+                signingConfig signingConfigs.release
+            } catch (ex) {
+            }
+            zipAlignEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -35,7 +49,7 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
 
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 }

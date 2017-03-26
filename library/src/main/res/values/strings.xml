@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MaterialTwoStageRating</string>
+    <string name="app_name" translatable="false">MaterialTwoStageRating</string>
     <string name="label_rateprompt_title">How would you rate our app?</string>
     <string name="label_feedback_title">We\'re Really Sorry</string>
     <string name="label_feedback_content">Could you tell us what problem you faced. This will help us improve.</string>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_rateprompt_title">Hoe zou je onze app beoordelen?</string>
+    <string name="label_feedback_title">Het spijt ons</string>
+    <string name="label_feedback_content">Kan je ons vertellen welk probleem je tegenkwam? Dit zal ons helpen om de app te verbeteren.</string>
+    <string name="label_feedback_feedback">Schrijf hier je feedback!</string>
+    <string name="label_feedback_positive_button">Verstuur</string>
+    <string name="label_feedback_negative_button">Nee, bedankt!</string>
+    <string name="label_confirm_title">Bedankt!</string>
+    <string name="label_confirm_content">Zou je je beoordeling op de app store willen plaatsen? Dit zal ons helpen en motiveren!</string>
+    <string name="label_confirm_positive_button">Natuurlijk</string>
+    <string name="label_confirm_negative_button">Nee, bedankt!</string>
+</resources>

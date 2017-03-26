@@ -15,11 +15,11 @@ TODO
 
 Go to your project's build.gradle, and add the Maven OSS Snapshot repository:
 
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 
 Go to your app's build.gradle file and inside dependencies{} add :
 
-     compile 'be.jatra:materialtwostagerating:1.0.1-SNAPSHOT'
+     compile 'be.jatra:materialtwostagerating:1.0.1'
 
 #  Usage
 

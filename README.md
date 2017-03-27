@@ -13,7 +13,7 @@ TODO
 
 # Install
 
-Go to your project's build.gradle, and add the Maven OSS Snapshot repository:
+Go to your project's build.gradle, and add the Maven OSS Releases repository:
 
     maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 

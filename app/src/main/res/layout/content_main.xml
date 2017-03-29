@@ -13,19 +13,19 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/showMaterialTwoStageRatingDialog1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Button"
-        android:visibility="gone" />
+        android:text="show dialog" />
 
-    <!--<Button-->
-        <!--android:id="@+id/button2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:text="Button" />-->
+    <Button
+        android:id="@+id/showMaterialTwoStageRatingDialog2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show dialog (custom icon and texts)"
+        android:layout_below="@+id/showMaterialTwoStageRatingDialog1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

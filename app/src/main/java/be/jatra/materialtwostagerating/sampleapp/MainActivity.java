@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -31,42 +32,26 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button dialog1 = (Button) findViewById(R.id.showMaterialTwoStageRatingDialog1);
+        dialog1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initTwoStage();
+                showMaterialTwoStageRatingDialog1();
+            }
+        });
+
+        Button dialog2 = (Button) findViewById(R.id.showMaterialTwoStageRatingDialog2);
+        dialog2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showMaterialTwoStageRatingDialog2();
             }
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(MainActivity.this, String.format("The settings menu was clicked."), Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void initTwoStage() {
+    private void showMaterialTwoStageRatingDialog1() {
         MaterialTwoStageRating dialog = MaterialTwoStageRating.with(this)
             .withIcon(true)
-//            .withCustomIcon(R.drawable.gray_circle)
             .withInstallDays(5)
             .withEventsTimes(3)
             .withLaunchTimes(5)
@@ -76,31 +61,68 @@ public class MainActivity extends AppCompatActivity {
             .withFeedbackDialogCallback(new FeedbackDialogCallback() {
                 @Override
                 public void onFeedbackReceived(final String feedback, final float rating) {
-                    Toast.makeText(MainActivity.this, String.format(Locale.ENGLISH, "FeedbackDialogCallback-onFeedbackReceived(feedback=%s, rating=%f)", feedback, rating), Toast.LENGTH_LONG).show();
+                    showToast(String.format(Locale.ENGLISH, "FeedbackDialogCallback-onFeedbackReceived(feedback=%s, rating=%f)", feedback, rating));
                 }
                 @Override
                 public void onCancel() {
-                    Toast.makeText(MainActivity.this, "FeedbackDialogCallback-onCancel()", Toast.LENGTH_SHORT).show();
+                    showToast("FeedbackDialogCallback-onCancel()");
                 }
             })
             .withRatePromptDialogCallback(new RatePromptDialogCallback() {
 
                 @Override
                 public void onCancel() {
-                    Toast.makeText(MainActivity.this, "RatePromptDialogCallback-onCancel()", Toast.LENGTH_LONG).show();
+                    showToast("RatePromptDialogCallback-onCancel()");
                 }
             })
             .withConfirmRateDialogCallback(new ConfirmRateDialogCallback() {
                 @Override
                 public void onCancel() {
-                    Toast.makeText(MainActivity.this, "ConfirmRateDialogCallback-onCancel()", Toast.LENGTH_LONG).show();
+                    showToast("ConfirmRateDialogCallback-onCancel()");
                 }
             });
 //        dialog.showIfMeetsConditions();
         dialog.showRatePromptDialog();
 //        dialog.incrementEvent();
+    }
 
-//        /**
+    private void showMaterialTwoStageRatingDialog2() {
+        MaterialTwoStageRating dialog = MaterialTwoStageRating.with(this)
+                .withIcon(true)
+            .withCustomIcon(R.drawable.gray_circle)
+                .withInstallDays(5)
+                .withEventsTimes(3)
+                .withLaunchTimes(5)
+                .resetOnDismiss(true)
+                .resetOnFeedBackDeclined(true)
+                .resetOnRatingDeclined(true)
+                .withFeedbackDialogCallback(new FeedbackDialogCallback() {
+                    @Override
+                    public void onFeedbackReceived(final String feedback, final float rating) {
+                        showToast(String.format(Locale.ENGLISH, "FeedbackDialogCallback-onFeedbackReceived(feedback=%s, rating=%f)", feedback, rating));
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        showToast("FeedbackDialogCallback-onCancel()");
+                    }
+                })
+                .withRatePromptDialogCallback(new RatePromptDialogCallback() {
+
+                    @Override
+                    public void onCancel() {
+                        showToast("RatePromptDialogCallback-onCancel()");
+                    }
+                })
+                .withConfirmRateDialogCallback(new ConfirmRateDialogCallback() {
+                    @Override
+                    public void onCancel() {
+                        showToast("ConfirmRateDialogCallback-onCancel()");
+                    }
+                });
+        dialog.showRatePromptDialog();
+
+        //        /**
 //         *  Provide your custom text on initial rate prompt dialog*/
 //       materialTwoStageRating.with(this)
 //               .withRatePromptTitle("INITIAL_TITLE")
@@ -126,5 +148,9 @@ public class MainActivity extends AppCompatActivity {
 //                .withFeedbackDialogPositiveText("POSITIVE_BUTTON_TEXT")
 //                .withFeedbackDialogNegativeText("NEGATIVE_BUTTON_TEXT")
 //                .withFeedbackDialogDismissible(false);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
     }
 }

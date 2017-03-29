@@ -96,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
                 .resetOnDismiss(true)
                 .resetOnFeedBackDeclined(true)
                 .resetOnRatingDeclined(true)
+                .withFeedbackDialogTitle("Feedback Title (customized)")
+                .withFeedbackDialogDescription("Feedback Description (customized)")
+                .withFeedbackDialogPositiveText("OK (customized)")
+                .withFeedbackDialogNegativeText("Cancel (customized)")
+                .withFeedbackDialogDismissible(false)
                 .withFeedbackDialogCallback(new FeedbackDialogCallback() {
                     @Override
                     public void onFeedbackReceived(final String feedback, final float rating) {
@@ -107,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
                         showToast("FeedbackDialogCallback-onCancel()");
                     }
                 })
+                .withRatePromptTitle("Rate Prompt Title (customized)")
+                .withRatePromptDismissible(false)
                 .withRatePromptDialogCallback(new RatePromptDialogCallback() {
 
                     @Override
@@ -114,6 +121,11 @@ public class MainActivity extends AppCompatActivity {
                         showToast("RatePromptDialogCallback-onCancel()");
                     }
                 })
+                .withConfirmRateDialogTitle("Confirmation Title (customized)")
+                .withConfirmRateDialogDescription("Confirmation Description (customized)")
+                .withConfirmRateDialogPositiveText("OK (customized)")
+                .withConfirmRateDialogNegativeText("Cancel (customized)")
+                .withConfirmRateDialogDismissible(true)
                 .withConfirmRateDialogCallback(new ConfirmRateDialogCallback() {
                     @Override
                     public void onCancel() {
@@ -121,33 +133,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         dialog.showRatePromptDialog();
-
-        //        /**
-//         *  Provide your custom text on initial rate prompt dialog*/
-//       materialTwoStageRating.with(this)
-//               .withRatePromptTitle("INITIAL_TITLE")
-//               .withRatePromptLaterText("LATER_TEXT")
-//               .withRatePromptNeverText("NEVER_TEXT")
-//               .withRatePromptDismissible(false);
-//
-//        /**
-//         * provide custom text on the confirmation dialog*/
-//
-//         materialTwoStageRating.with(this)
-//                 .withConfirmRateDialogTitle("CONFIRMATION_TITLE")
-//                 .withConfirmRateDialogDescription("CONFIRMATION_DESCRITPION")
-//                 .withConfirmRateDialogPositiveText("POSITIVE_BUTTON_TEXT")
-//                 .withConfirmRateDialogNegativeText("NEGATIVE_BUTTON_TEXT")
-//                 .withConfirmRateDialogDismissible(true);
-//
-//        /**
-//         * provide custom text on feedback dialog*/
-//        materialTwoStageRating.with(this)
-//                .withFeedbackDialogTitle("FEEDBACK_TITLE")
-//                .withFeedbackDialogDescription("FEEDBACK_DIALOG_DESCRIPTION")
-//                .withFeedbackDialogPositiveText("POSITIVE_BUTTON_TEXT")
-//                .withFeedbackDialogNegativeText("NEGATIVE_BUTTON_TEXT")
-//                .withFeedbackDialogDismissible(false);
     }
 
     private void showToast(String message) {

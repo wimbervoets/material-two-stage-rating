@@ -1,11 +1,8 @@
 package be.jatra.materialtwostagerating.sampleapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -88,50 +85,49 @@ public class MainActivity extends AppCompatActivity {
 
     private void showMaterialTwoStageRatingDialog2() {
         MaterialTwoStageRating dialog = MaterialTwoStageRating.with(this)
-                .withIcon(true)
+            .withIcon(true)
             .withCustomIcon(R.drawable.gray_circle)
-                .withInstallDays(5)
-                .withEventsTimes(3)
-                .withLaunchTimes(5)
-                .resetOnDismiss(true)
-                .resetOnFeedBackDeclined(true)
-                .resetOnRatingDeclined(true)
-                .withFeedbackDialogTitle("Feedback Title (customized)")
-                .withFeedbackDialogDescription("Feedback Description (customized)")
-                .withFeedbackDialogPositiveText("OK (customized)")
-                .withFeedbackDialogNegativeText("Cancel (customized)")
-                .withFeedbackDialogDismissible(false)
-                .withFeedbackDialogCallback(new FeedbackDialogCallback() {
-                    @Override
-                    public void onFeedbackReceived(final String feedback, final float rating) {
-                        showToast(String.format(Locale.ENGLISH, "FeedbackDialogCallback-onFeedbackReceived(feedback=%s, rating=%f)", feedback, rating));
-                    }
+            .withInstallDays(5)
+            .withEventsTimes(3)
+            .withLaunchTimes(5)
+            .resetOnDismiss(true)
+            .resetOnFeedBackDeclined(true)
+            .resetOnRatingDeclined(true)
+            .withFeedbackDialogTitle("Feedback Title (customized)")
+            .withFeedbackDialogDescription("Feedback Description (customized)")
+            .withFeedbackDialogPositiveText("OK (customized)")
+            .withFeedbackDialogNegativeText("Cancel (customized)")
+            .withFeedbackDialogDismissible(false)
+            .withFeedbackDialogCallback(new FeedbackDialogCallback() {
+                @Override
+                public void onFeedbackReceived(final String feedback, final float rating) {
+                    showToast(String.format(Locale.ENGLISH, "FeedbackDialogCallback-onFeedbackReceived(feedback=%s, rating=%f)", feedback, rating));
+                }
 
-                    @Override
-                    public void onCancel() {
-                        showToast("FeedbackDialogCallback-onCancel()");
-                    }
-                })
-                .withRatePromptTitle("Rate Prompt Title (customized)")
-                .withRatePromptDismissible(false)
-                .withRatePromptDialogCallback(new RatePromptDialogCallback() {
-
-                    @Override
-                    public void onCancel() {
-                        showToast("RatePromptDialogCallback-onCancel()");
-                    }
-                })
-                .withConfirmRateDialogTitle("Confirmation Title (customized)")
-                .withConfirmRateDialogDescription("Confirmation Description (customized)")
-                .withConfirmRateDialogPositiveText("OK (customized)")
-                .withConfirmRateDialogNegativeText("Cancel (customized)")
-                .withConfirmRateDialogDismissible(true)
-                .withConfirmRateDialogCallback(new ConfirmRateDialogCallback() {
-                    @Override
-                    public void onCancel() {
-                        showToast("ConfirmRateDialogCallback-onCancel()");
-                    }
-                });
+                @Override
+                public void onCancel() {
+                    showToast("FeedbackDialogCallback-onCancel()");
+                }
+            })
+            .withRatePromptTitle("Rate Prompt Title (customized)")
+            .withRatePromptDismissible(false)
+            .withRatePromptDialogCallback(new RatePromptDialogCallback() {
+                @Override
+                public void onCancel() {
+                    showToast("RatePromptDialogCallback-onCancel()");
+                }
+            })
+            .withConfirmRateDialogTitle("Confirmation Title (customized)")
+            .withConfirmRateDialogDescription("Confirmation Description (customized)")
+            .withConfirmRateDialogPositiveText("OK (customized)")
+            .withConfirmRateDialogNegativeText("Cancel (customized)")
+            .withConfirmRateDialogDismissible(true)
+            .withConfirmRateDialogCallback(new ConfirmRateDialogCallback() {
+                @Override
+                public void onCancel() {
+                    showToast("ConfirmRateDialogCallback-onCancel()");
+                }
+            });
         dialog.showRatePromptDialog();
     }
 

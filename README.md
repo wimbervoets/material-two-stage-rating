@@ -1,9 +1,10 @@
 [![Build Status](https://api.travis-ci.org/wimbervoets/material-two-stage-rating.svg)](https://travis-ci.org/wimbervoets/material-two-stage-rating)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d2be3003a2244fb8bef6fd91b9fd87e)](https://www.codacy.com/app/wimbervoets/material-two-stage-rating?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wimbervoets/MaterialTwoStageRating&amp;utm_campaign=Badge_Grade)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/wimbervoets/MaterialTwoStageRating/blob/master/LICENSE)
+[![Download](https://img.shields.io/badge/Sonatype%20OSSRH-1.0.1-brightgreen.svg)](https://oss.sonatype.org/#nexus-search;gav~be.jatra~materialtwostagerating~1.0.1~~)
 
-# MaterialTwoStageRating
-MaterialTwoStageRating is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
+# Material Two Stage Rating
+"Material Two Stage Rating" is a library to help you promote your android app by prompting users to rate the app after using it for a few days.
 Also its two stage process ensures higher reviews to go to playstore while getting useful feedback on lower ratings.
 
 

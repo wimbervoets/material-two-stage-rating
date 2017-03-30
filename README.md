@@ -10,7 +10,13 @@ Also its two stage process ensures higher reviews to go to playstore while getti
 
 # Screenshots and stages
 
-TODO
+<img src="https://raw.githubusercontent.com/wimbervoets/material-two-stage-rating/snapshots/device-2017-03-29-214628.png" width="200" height="350" /><br/>
+<img src="https://raw.githubusercontent.com/wimbervoets/material-two-stage-rating/snapshots/device-2017-03-29-214713.png" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wimbervoets/material-two-stage-rating/snapshots/device-2017-03-29-214753.png" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wimbervoets/material-two-stage-rating/snapshots/device-2017-03-29-214859.png" width="200" height="350" /><br/>
+<img src="https://raw.githubusercontent.com/wimbervoets/material-two-stage-rating/snapshots/device-2017-03-29-215033.png" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wimbervoets/material-two-stage-rating/snapshots/device-2017-03-29-215120.png" width="200" height="350" />
+<img src="https://raw.githubusercontent.com/wimbervoets/material-two-stage-rating/snapshots/device-2017-03-29-215231.png" width="200" height="350" />
 
 # Install
 

@@ -37,7 +37,7 @@ Put this one liner in the onCreate() method of your activity:
 
 # Apps using MaterialTwoStageRating
 
-TODO
+* [Makota Money Manager](https://play.google.com/store/apps/details?id=be.jatra.makota)
 
 # Contribute
 Contributions are welcome. Please open a [pull-request](https://help.github.com/articles/about-pull-requests/).

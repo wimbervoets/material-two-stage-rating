@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_rateprompt_title">Comment évaluez-vous notre application?</string>
+    <string name="label_feedback_title">Désolé</string>
+    <string name="label_feedback_content">Pouvez-vous nous dire le problème que vous avez rencontré? Cela nous aidera à améliorer l\'application.</string>
+    <string name="label_feedback_feedback">Ecrivez vos commentaires ici!</string>
+    <string name="label_feedback_positive_button">Envoyer</string>
+    <string name="label_feedback_negative_button">Non, merci!</string>
+    <string name="label_confirm_title">Merci!</string>
+    <string name="label_confirm_content">Voulez-vous poster votre avis sur l\'App Store? Cela nous aidera et motivera!</string>
+    <string name="label_confirm_positive_button">Oui, biensûr!</string>
+    <string name="label_confirm_negative_button">Non, merci!</string>
+</resources>

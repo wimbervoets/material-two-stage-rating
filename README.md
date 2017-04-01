@@ -1,6 +1,6 @@
 [![Build Status](https://api.travis-ci.org/wimbervoets/material-two-stage-rating.svg)](https://travis-ci.org/wimbervoets/material-two-stage-rating)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d2be3003a2244fb8bef6fd91b9fd87e)](https://www.codacy.com/app/wimbervoets/material-two-stage-rating?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wimbervoets/MaterialTwoStageRating&amp;utm_campaign=Badge_Grade)
-[![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/wimbervoets/MaterialTwoStageRating/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/wimbervoets/material-two-stage-rating/blob/master/LICENSE)
 [![Download](https://img.shields.io/badge/Sonatype%20OSSRH-1.0.2-brightgreen.svg)](https://oss.sonatype.org/#nexus-search;gav~be.jatra~materialtwostagerating~1.0.2~~)
 
 # Material Two Stage Rating
@@ -35,7 +35,7 @@ Put this one liner in the onCreate() method of your activity:
 	MaterialTwoStageRating.with(this).showIfMeetsConditions();
 ```
 
-# Apps using MaterialTwoStageRating
+# Apps using Material Two Stage Rating
 
 * [Makota Money Manager](https://play.google.com/store/apps/details?id=be.jatra.makota)
 
